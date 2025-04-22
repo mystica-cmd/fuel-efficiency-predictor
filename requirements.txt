@@ -65,7 +65,7 @@ nbformat==5.10.4
 nest-asyncio==1.6.0
 notebook==7.4.0
 notebook_shim==0.2.4
-numpy==2.2.5
+numpy==1.21.2  # Updated numpy version to avoid potential Rust issues
 overrides==7.7.0
 packaging==25.0
 pandas==2.2.3
@@ -117,5 +117,4 @@ websocket-client==1.8.0
 Werkzeug==3.1.3
 widgetsnbextension==4.0.14
 gunicorn==20.1.0
-# Other dependencies
 python_version>=3.7,<3.11
