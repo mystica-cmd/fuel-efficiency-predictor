@@ -116,3 +116,7 @@ webencodings==0.5.1
 websocket-client==1.8.0
 Werkzeug==3.1.3
 widgetsnbextension==4.0.14
+Flask==2.0.1
+gunicorn==20.1.0
+# Other dependencies
+python_version>=3.7,<3.11
