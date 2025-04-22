@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fuel Efficiency Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+            max-width: 420px;
+            width: 90%;
+            margin-top: 40px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-container img {
+            width: 100px;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: #fff;
+            transition: border-color 0.2s;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result,
+        .error {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .result {
+            color: #28a745;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+
+        footer {
+            text-align: center;
+            margin: 40px 0 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            input,
+            select {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        </div>
+        <h1>Fuel Efficiency Prediction</h1>
+
+        <form method="POST">
+            <label>Engine Displacement (L):</label>
+            <input type="number" step="any" name="displ" required>
+
+            <label>Cylinders:</label>
+            <input type="number" name="cylinders" required>
+
+            <label>Drive Type:</label>
+            <select name="drive" required>
+                <option disabled selected value>-- Select Drive Type --</option>
+                <option>Front-Wheel Drive</option>
+                <option>Rear-Wheel Drive</option>
+                <option>4-Wheel or All-Wheel Drive</option>
+            </select>
+
+            <label>Transmission:</label>
+            <select name="trany" required>
+                <option disabled selected value>-- Select Transmission --</option>
+                <option>Automatic(S6)</option>
+                <option>Automatic(S10)</option>
+                <option>Manual(M6)</option>
+                <option>Automatic(S1)</option>
+            </select>
+
+            <label>Fuel Type:</label>
+            <select name="fuelType" required>
+                <option disabled selected value>-- Select Fuel Type --</option>
+                <option>Regular Gasoline</option>
+                <option>Midgrade Gasoline</option>
+                <option>Premium Gasoline</option>
+                <option>Diesel</option>
+                <option>Electricity</option>
+            </select>
+
+            <label>Vehicle Class:</label>
+            <select name="VClass" required>
+                <option disabled selected value>-- Select Vehicle Class --</option>
+                <option>Compact Car</option>
+                <option>Sport Utility Vehicle - Large</option>
+                <option>Small Station Wagon</option>
+                <option>Minivan - 2WD</option>
+                <option>Standard Pickup Trucks 2WD</option>
+            </select>
+
+            <input type="submit" value="Predict MPG">
+        </form>
+
+        {% if prediction and prediction is string and prediction.startswith("Error") %}
+            <div class="error">{{ prediction }}</div>
+        {% elif prediction %}
+            <div class="result">
+                <strong>Predicted MPG:</strong> {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        Developed by <strong>Harshika Shinde</strong> · Fuel Efficiency ML Project · 2025
+    </footer>
+</body>
+</html>
